@@ -30,4 +30,16 @@ blogRouter.post("/delete", (req,res)=> {
     res.redirect("/")
 })
 
+blogRouter.put("/update", (req,res)=> {
+    const {title, description, id} = req.body
+    let today = new Date().toISOString().slice(0, 10)
+    const updatedBlog = {
+        title: title,
+        description: description,
+        date: today
+    }
+    blogModel.findByIdAndUpdate(id, {$set: updatedBlog})
+    res.redirect("/");
+})
+
 module.exports = blogRouter
