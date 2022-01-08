@@ -1,0 +1,37 @@
+const passport = require("passport");
+const passportLocal = require("passport-local-mongoose");
+const session = require("express-session");
+
+app.use(session({
+    secret: "hefnwpefnewf"
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(authModel.createStrategy());
+
+passport.serializeUser((user,done)=> {
+    done(null, user.id)
+})
+
+passport.deserializeUser((id,done)=> {
+authModel.findById(id, (err,user)=> {
+    done(null,user)
+})
+})
+
+passport.register(id, password, (err, user)=> {
+    if(!err){
+        passport.authenticate("local")(req,res, ()=> {
+            res.render("home")
+        })
+    }
+})
+
+req.login(user, (err)=> {
+if(!err){
+    passport.authenticate("local")(req,res, ()=> {
+        res.render("home")
+    })
+}
+})

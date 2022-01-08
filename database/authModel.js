@@ -7,6 +7,6 @@ const authSchema = new Schema({
  password: String,
 })
 
-authSchema.plugin(passportLocalMongoose);
+authSchema.plugin(passportLocalMongoose); //installing plugin to add credentials in an easy way.
 
 module.exports =  mongoose.model("credential", authSchema);
